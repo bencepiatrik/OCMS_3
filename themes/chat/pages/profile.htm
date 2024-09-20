@@ -1,0 +1,26 @@
+title = "Profile"
+url = "/profile"
+==
+<?php
+use CustomSlack\Chat\Models\User;
+
+function onStart()
+{
+    $user_id = Session::get('user');
+    $this['user'] = User::find($user_id);
+}
+?>
+
+==
+
+<h1>Profile</h1>
+
+
+<h1>Welcome, {{ user.first_name }}</h1>
+
+<p>First Name: {{ user.first_name }}</p>
+<p>Last Name: {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+
+<a href="/logout">Logout</a>
+

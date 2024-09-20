@@ -1,0 +1,60 @@
+title = "Home"
+
+url = "/home"
+==
+<?php
+use CustomSlack\Chat\Models\User;
+
+function onStart()
+{
+    // Get the search query from input
+    $searchQuery = input('search');
+
+    // If a search query is present, filter users by name or email
+    if ($searchQuery) {
+        $this['users'] = User::where('username', 'like', "%{$searchQuery}%")
+                            ->orWhere('email', 'like', "%{$searchQuery}%")
+                            ->get();
+    } else {
+    // Retrieve all users if no search query is provided
+    $this['users'] = User::all();
+    }
+}
+?>
+==
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/chats">Chats</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/users">Users</a></li>
+
+    </ul>
+</nav>
+
+<h1>HOME</h1>
+<br><br><br>
+<br><br><br>
+<!-- Search Bar -->
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Search users by name or email">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Display Search Results -->
+<h2>Search Results:</h2>
+<ul>
+    {% for user in users %}
+    <li>{{ user.name }} - {{ user.email }}</li>
+    {% else %}
+    <li>No users found.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

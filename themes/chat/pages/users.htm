@@ -1,0 +1,32 @@
+title = "Users"
+
+url = "/users"
+==
+<?php
+use CustomSlack\Chat\Models\User;
+
+function onStart()
+{
+    $this['users'] = User::all(); // Retrieve all users
+}
+?>
+
+==
+<html>
+<head>
+    <title>Users</title>
+</head>
+<body>
+<h1>All Users</h1>
+
+<ul>
+    {% for user in users %}
+    <li>{{ user.first_name }} {{ user.last_name }} - {{ user.email }}</li>
+    {% else %}
+    <li>No users found.</li>
+    {% endfor %}
+</ul>
+
+<a href="/home">Go back to Home</a>
+</body>
+</html>
