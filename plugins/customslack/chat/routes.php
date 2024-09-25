@@ -16,4 +16,5 @@ Route::group(['middleware' => ['web']], function () {
 
   //  Route::get('profile', 'CustomSlack\Chat\Controllers\AuthController@profile');
 
+    Route::post('/create-chat', 'CustomSlack\Chat\Controllers\ChatController@createChat');
 });

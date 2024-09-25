@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Chat Controller
+
+# Model Form Field configuration
+form: $/customslack/chat/models/chatcontroller/fields.yaml
+
+# Model Class name
+modelClass: CustomSlack\Chat\Models\ChatController
+
+# Default redirect location
+defaultRedirect: customslack/chat/chatcontroller
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: customslack/chat/chatcontroller/update/:id
+    redirectClose: customslack/chat/chatcontroller
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: customslack/chat/chatcontroller
+    redirectClose: customslack/chat/chatcontroller
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title
