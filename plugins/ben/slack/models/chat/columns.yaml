@@ -1,0 +1,26 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    user1_id:
+        label: First User
+        relation: user1
+        select: username
+
+    user2_id:
+        label: Second User
+        relation: user2
+        select: username
+
+    created_at:
+        label: Created
+        type: datetime
+
+    updated_at:
+        label: Updated
+        type: datetime
