@@ -75,7 +75,7 @@ class ChatController extends Controller
         return response()->json($chats);
     }
 
-    public function authenticateWithToken(Request $request)
+    public function authenticateWithToken(Request $request) // REVIEW - toto sa ti veľa opakuje + je to niečo čo by si mal riešiť cez middleware v routes.php ako si to robil v leveli 2
     {
         $token = $request->header('Authorization');
 

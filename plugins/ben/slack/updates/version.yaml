@@ -1,2 +1,4 @@
 v1.0.1: First version of Slack
     - Creating tables for slack
+# REVIEW - ako ti prebiehajú migrácie, keď ich tu nemáš zapísané? resp. čo urobíš aby sa ti zmigrovali všetky tie migrácie čo máš v updates/ folderi?
+# REVIEW - skúšal som zmigrovať cez konzolu a nič sa nestalo, robíš to nejako inak?

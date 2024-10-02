@@ -50,6 +50,7 @@ class Message extends Model
         return $this->hasMany('Ben\Slack\Models\Reaction', 'message_id');
     }
 
+    // REVIEW - vidím že tu riešiš ten file cez custom funkcie, skús pozrieť v OCMS docs attachments, možno to bude jednoduchšie
     public function setFileAttribute($file)
     {
         if ($file) {

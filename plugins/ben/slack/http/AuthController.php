@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Ben\Slack\Models\User;
 use Response;
 
+// REVIEW - Tu sa čo stalo s formátovaním? xdd
 class AuthController
 {
-public function register(Request $request)
+public function register(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/)
 {
 $validatedData = $request->validate([
 'username' => 'required|unique:users',
@@ -21,7 +22,7 @@ $user = User::create([
 return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
 }
 
-public function login(Request $request)
+public function login(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/)
 {
 $validatedData = $request->validate([
 'username' => 'required',

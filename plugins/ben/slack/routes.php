@@ -1,5 +1,8 @@
 <?php
 
+/* REVIEW - používaš controller cez string, je to o dosť výhodnejšie, keď to spravíš ako si to mal v minulom leveli myslím
+čiže cez user Ben\Slack\Http\AuthController; a potom [AuthController, 'funkcia']
+Teraz napr. nemôžem využívať text editor funkcie ako redirect na controller cez Ctrl + LMB, tažšie sa to číta a pod */
 Route::group(['prefix' => 'api/v1', 'middleware' => ['web']], function() {
     // Auth routes
     Route::post('/register', 'Ben\Slack\Http\AuthController@register');

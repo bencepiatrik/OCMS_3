@@ -72,6 +72,8 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
+        /* REVIEW - neregistruješ žiadny admin area navigation, ale pre každý model máš urobený controller a fields.yaml / columns.yaml
+        používaš niekde tieto controlleri a fields.yaml / columns.yaml? A taktiež celkovo prečo neregistruješ navigation? V leveli 2 si to implementoval myslím */
         return []; // Remove this line to activate
 
         return [

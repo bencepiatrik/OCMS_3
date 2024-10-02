@@ -2,6 +2,8 @@
 
 use Model;
 
+// REVIEW - Toto je model, mal by byť medzi modelmi namiesto medzi updates (migrácie)
+
 /**
  * EmojiSettings Model
  *
