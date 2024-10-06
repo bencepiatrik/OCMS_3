@@ -1,6 +1,5 @@
 <?php namespace Ben\Slack\Models;
 
-use Hash;
 use Model;
 use Str;
 
@@ -12,6 +11,7 @@ use Str;
 class User extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Hashable;
 
     /**
      * @var string table name
@@ -23,13 +23,12 @@ class User extends Model
      */
     public $rules = [];
 
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['username'];
+
+    protected $hashable = ['password'];
+
 
     // REVIEW - Ak som ti ešte nespomínal $hashable (OCMS docs) tak si to pozri, robí to túto funkciu v podstate za teba
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
 
     public function generateApiToken()
     {

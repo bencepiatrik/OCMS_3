@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('api_token', 80)->unique()->nullable()->default(null); // REVIEW - tu nepotrebuješ ->default(null), ak je to ->nullable() tak by to default aj tak malo byť null
+            $table->string('api_token', 80)->unique()->nullable(); // REVIEW - tu nepotrebuješ ->default(null), ak je to ->nullable() tak by to default aj tak malo byť null
             $table->timestamps();
         });
     }

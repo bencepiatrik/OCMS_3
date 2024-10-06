@@ -22,8 +22,8 @@ class Reaction extends Model
     public $rules = [];
 
     public $belongsTo = [
-        'message' => ['Ben\Slack\Models\Message', 'key' => 'message_id'],
-        'user' => ['Ben\Slack\Models\User', 'key' => 'user_id'],
+        'message' => [Message::class, 'key' => 'message_id'],
+        'user' => [User::class, 'key' => 'user_id'],
     ];
 
 
@@ -32,14 +32,4 @@ class Reaction extends Model
         'user_id',
         'emoji',
     ];
-
-    public function message()
-    {
-        return $this->belongsTo('Ben\Slack\Models\Message', 'message_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('Ben\Slack\Models\User', 'user_id');
-    }
 }

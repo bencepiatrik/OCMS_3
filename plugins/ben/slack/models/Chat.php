@@ -31,7 +31,7 @@ class Chat extends Model
     }
 
     public $belongsTo = [
-        'user1' => ['Ben\Slack\Models\User', 'key' => 'user1_id'],
-        'user2' => ['Ben\Slack\Models\User', 'key' => 'user2_id'],
+        'user1' => [User::class, 'key' => 'user1_id'],
+        'user2' => [User::class, 'key' => 'user2_id'],
     ];
 }

@@ -25,29 +25,14 @@ class Message extends Model
 
 
     public $belongsTo = [
-        'chat' => ['Ben\Slack\Models\Chat', 'key' => 'chat_id'],
-        'user' => ['Ben\Slack\Models\User', 'key' => 'user_id'],
-        'replyToMessage' => ['Ben\Slack\Models\Message', 'key' => 'reply_to_message_id']
+        'chat' => [Chat::class, 'key' => 'chat_id'],
+        'user' => [User::class, 'key' => 'user_id'],
+        'replyToMessage' => [Message::class, 'key' => 'reply_to_message_id']
     ];
-
-    public function chat()
-    {
-        return $this->belongsTo('Ben\Slack\Models\Chat', 'chat_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('Ben\Slack\Models\User', 'user_id');
-    }
-
-    public function replyToMessage()
-    {
-        return $this->belongsTo('Ben\Slack\Models\Message', 'reply_to_message_id');
-    }
 
     public function reactions()
     {
-        return $this->hasMany('Ben\Slack\Models\Reaction', 'message_id');
+        return $this->hasMany(Reaction::class, 'message_id');
     }
 
     // REVIEW - vidím že tu riešiš ten file cez custom funkcie, skús pozrieť v OCMS docs attachments, možno to bude jednoduchšie
