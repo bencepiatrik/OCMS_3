@@ -1,52 +1,80 @@
 <?php namespace Ben\Slack\Http;
 
-use Ben\Slack\Models\Chat;
-use Ben\Slack\Models\Message;
 use Illuminate\Http\Request;
+use Ben\Slack\Models\Message;
+use System\Models\File;
 
-/**
- * Message Controller Backend Controller
- *
- * @link https://docs.octobercms.com/3.x/extend/system/controllers.html
- */
 class MessageController
 {
-    public function sendMessage(Request $request)
+    public function store(Request $request)
     {
-        $user = $request->input('authenticated_user');
-
-        $chatId = $request->input('chat_id');
-        $chat = Chat::find($chatId);
-
-        if (!$chat || !in_array($user->id, [$chat->user1_id, $chat->user2_id])) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $message = Message::create([
-            'chat_id' => $chatId,
-            'user_id' => $user->id,
-            'content' => $request->input('content'),
-            'reply_to_message_id' => $request->input('reply_to_message_id'),
-            'file_path' => $request->hasFile('file') ? $request->file('file')->store('/uploads') : null
+        $validatedData = $request->validate([
+            'chat_id' => 'required|exists:ben_slack_chats,id',
+            'content' => 'required|string',
+            'attachment' => 'nullable|file|mimes:jpg,png,pdf',
         ]);
 
-        return response()->json($message);
-    }
+        $message = new Message();
+        $message->chat_id = $validatedData['chat_id'];
+        $message->content = $validatedData['content'];
 
-    public function getMessages($chatId, Request $request)
-    {
         $user = $request->input('authenticated_user');
 
-        $chat = Chat::find($chatId);
-        if (!$chat || !in_array($user->id, [$chat->user1_id, $chat->user2_id])) {
-            return response()->json(['error' => 'Unauthorized'], 403);
+        $message->user_id = $user->id;
+
+        $message->save();
+
+        if ($request->hasFile('attachment')) {
+            $file = new File();
+            $file->fromPost($request->file('attachment'));
+            $message->attachment()->add($file);
         }
 
-        $messages = $chat->messages()->get()->map(function ($message) {
-            $message->file_url = $message->file_path ? url('storage/app/' . $message->file_path) : null;
-            return $message;
-        });
+        return response()->json(['message' => 'Message created successfully', 'data' => $message], 201);
+    }
 
-        return response()->json($messages);
+    public function update($id, Request $request)
+    {
+        $validatedData = $request->validate([
+            'chat_id' => 'required|exists:chats,id',
+            'content' => 'required|string',
+            'attachment' => 'nullable|file|mimes:jpg,png,pdf',
+        ]);
+
+        // Find the message
+        $message = Message::findOrFail($id);
+        $message->content = $validatedData['content'];
+        $message->save();
+
+        // Check if new attachment exists
+        if ($request->hasFile('attachment')) {
+            // Remove old attachment if it exists
+
+            $file = new File();
+            $file->fromPost($request->file('attachment'));
+            $message->attachment()->add($file);
+        }
+
+        return response()->json(['message' => 'Message updated successfully', 'data' => $message], 200);
+    }
+
+    public function show($id)
+    {
+        $message = Message::with('attachment')->findOrFail($id);
+
+        return response()->json(['data' => $message], 200);
+    }
+
+    public function delete($id)
+    {
+        $message = Message::findOrFail($id);
+
+        if ($message->attachment) {
+            $message->attachment->delete(); // Delete the file attachment
+        }
+
+        $message->delete();
+
+        return response()->json(['message' => 'Message deleted successfully'], 200);
     }
 }

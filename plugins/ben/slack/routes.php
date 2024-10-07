@@ -23,8 +23,21 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [AuthMiddleware::class]], fu
     Route::get('/chats', [ChatController::class, 'listChats']);
 
     // Message routes
-    Route::post('/messages', [MessageController::class, 'sendMessage']);
-    Route::get('/chats/{chatId}/messages', [MessageController::class, 'getMessages']);
+ //   Route::post('/messages', [MessageController::class, 'sendMessage']);
+ //   Route::get('/chats/{chatId}/messages', [MessageController::class, 'getMessages']);
+
+
+    // Send
+    Route::post('messages', [MessageController::class, 'store']);
+    // View
+    Route::get('messages/{id}', [MessageController::class, 'show']);
+    // Update
+    Route::put('messages/{id}', [MessageController::class, 'update']);
+    // Delete
+    Route::delete('messages/{id}', [MessageController::class, 'delete']);
+
+
+
 
     // User list
     Route::get('/users', [UserController::class, 'getAllUsers']);

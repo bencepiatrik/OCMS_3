@@ -23,11 +23,14 @@ class Message extends Model
 
     protected $fillable = ['chat_id', 'user_id', 'content', 'reply_to_message_id', 'file_path'];
 
-
     public $belongsTo = [
-        'chat' => [Chat::class, 'key' => 'chat_id'],
+        'chat' => [Chat::class, 'key' => 'id'],
         'user' => [User::class, 'key' => 'user_id'],
         'replyToMessage' => [Message::class, 'key' => 'reply_to_message_id']
+    ];
+
+    public $attachOne = [
+        'attachment' => 'System\Models\File'
     ];
 
     public function reactions()
@@ -36,15 +39,4 @@ class Message extends Model
     }
 
     // REVIEW - vidím že tu riešiš ten file cez custom funkcie, skús pozrieť v OCMS docs attachments, možno to bude jednoduchšie
-    public function setFileAttribute($file)
-    {
-        if ($file) {
-            $this->attributes['file_path'] = $file->store('uploads');
-        }
-    }
-
-    public function getFileUrlAttribute()
-    {
-        return url('storage/' . $this->file_path);
-    }
 }
