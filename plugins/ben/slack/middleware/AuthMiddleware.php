@@ -17,7 +17,7 @@ class AuthMiddleware
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $request->user = $user;
+        $request->merge(['authenticated_user' => $user]);
 
         return $next($request);
     }

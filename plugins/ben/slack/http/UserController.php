@@ -2,11 +2,18 @@
 
 use Illuminate\Http\Request;
 use Ben\Slack\Models\User;
-use Response;
 
-// REVIEW - Tu sa čo stalo s formátovaním? xdd
-class AuthController
+class UserController
 {
+    public function getAllUsers(Request $request)
+    {
+        $user = $request->input('authenticated_user');
+
+        $users = User::where('id', '!=', $user->id)->get(['id', 'username', 'email']);
+
+        return response()->json($users);
+    }
+
     public function register(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/)
     {
         $validatedData = $request->validate([
@@ -16,7 +23,7 @@ class AuthController
 
         $user = new User();
         $user->username = $validatedData['username'];
-        $user->password = $validatedData['password'];  // Hashable will automatically hash this.
+        $user->password = $validatedData['password'];
         $user->save();
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);

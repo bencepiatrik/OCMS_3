@@ -1,10 +1,9 @@
 <?php
 
-use Ben\Slack\Http\AuthController;
-use Ben\Slack\Controllers\ChatController;
-use Ben\Slack\Controllers\MessageController;
-use Ben\Slack\Controllers\UserController;
-use Ben\Slack\Controllers\ReactionController;
+use Ben\Slack\Http\UserController;
+use Ben\Slack\Http\ChatController;
+use Ben\Slack\Http\MessageController;
+use Ben\Slack\Http\ReactionController;
 use Ben\Slack\Middleware\AuthMiddleware;
 
 /* REVIEW - používaš controller cez string, je to o dosť výhodnejšie, keď to spravíš ako si to mal v minulom leveli myslím
@@ -13,8 +12,8 @@ Teraz napr. nemôžem využívať text editor funkcie ako redirect na controller
 
 Route::group(['prefix' => 'api/v1', 'middleware' => ['web']], function() {
     // Auth routes
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
 });
 
 
