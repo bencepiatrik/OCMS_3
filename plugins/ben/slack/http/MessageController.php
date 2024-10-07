@@ -41,14 +41,11 @@ class MessageController
             'attachment' => 'nullable|file|mimes:jpg,png,pdf',
         ]);
 
-        // Find the message
         $message = Message::findOrFail($id);
         $message->content = $validatedData['content'];
         $message->save();
 
-        // Check if new attachment exists
         if ($request->hasFile('attachment')) {
-            // Remove old attachment if it exists
 
             $file = new File();
             $file->fromPost($request->file('attachment'));
@@ -70,7 +67,7 @@ class MessageController
         $message = Message::findOrFail($id);
 
         if ($message->attachment) {
-            $message->attachment->delete(); // Delete the file attachment
+            $message->attachment->delete();
         }
 
         $message->delete();
