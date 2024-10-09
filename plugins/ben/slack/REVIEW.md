@@ -1,6 +1,6 @@
 # REVIEW
 
-e## Migrácie
+## Migrácie
 php artisan october:migrate
 toto ti zbehne migrácie, ktoré máš zapísané v version.yaml, kde ale momentálne nič nemáš, takže dáva zmysel že ti to nič nerobí, skús pridať migrácie takto
 
