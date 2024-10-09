@@ -16,6 +16,7 @@ class UserController
 
     public function register(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/)
     {
+        // REVIEW - všetká validácia čo takto robíš sa dá premiestniť do modelu a je to tak elegantnejšie / lepšie, takže odporučam premiestniť do $rules = [] pre všetky modely
         $validatedData = $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required|min:6',

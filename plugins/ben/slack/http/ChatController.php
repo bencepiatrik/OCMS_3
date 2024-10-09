@@ -9,7 +9,7 @@ class ChatController
     {
         $user = $request->input('authenticated_user');
 
-
+        // REVIEW - Tu mi celkom chýba validácia pre toto ID, nemusí existovať (toto sa taktiež dá dokázať v $rules v modeli)
         $user2Id = $request->input('user2_id');
 
         $chat = Chat::create([

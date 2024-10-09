@@ -1,30 +1,29 @@
 # REVIEW
 
-## General
-Celkovo mi príde že robíš veci inak, alebo ich vôbec nerobíš oproti levelu 2
-Nie som si istý prečo, ak to má nejaký dôvod, ktorý by si chcel rozoberať tak daj vedieť, ale každopádne v kóde spomínam v komentoch konkrétne veci, niektoré spomínam tu v REVIEW.md
-Čo je ale fajn že si správne pochopil dátovú štruktúru, a tým myslím to ako si spravil migrácie, aj keď version.yaml trochu nerozumiem prečo tie migrácie nie sú
-Potom sú tu relations, ale to by som prebral keď opravíme veci čo spomínam v tomto review
+e## Migrácie
+php artisan october:migrate
+toto ti zbehne migrácie, ktoré máš zapísané v version.yaml, kde ale momentálne nič nemáš, takže dáva zmysel že ti to nič nerobí, skús pridať migrácie takto
 
-Pozri čo píšem v tomto review, na rôznych miestach sa pýtam, ale celkovo môžeme to riešiť na slacku, keď tak len pofixuj čo spomínam
+v1.0.1: First version of Slack
+ - create_chats_table.php
+ ...
 
-## composer.json
-v composer.json máš toto v require blocku
-"ext-http": "*"
-Pridával si to manuálne? Ak hej tak prečo?
+## Importovanie
+V routes.php si to opravil, ale opäť to vidím na nejakých iných miestach, napr. Message.php
+Ak sa dá, tak VŽDY importuj redšej cez use alebo ::class namiesto importovania cez string
 
-## Class importing
-Na viacerých miestach v kóde používaš namiesto importovania cez 'use' importovanie cez string
-čiže napr. 'Ben\Slack\Models\Chat'
-V routes.php som to spomenul podrobnejšie, ale deje sa to na viacerých miestach
+'Parent\Plugin\Class' -> use Parent\Plugin\Class alebo \Parent\Plugin\Class::class
 
-## Controllers
-Aktuálne to máš urobené tak že logika pre endpointy sa deje v controlleroch, čo je dobré, ale existujú 2 typy controller a je treba ich rozlišovať
-Prvý typ je OCMS admin area controller, to sú controlleri ktoré sú zodpovedné za spravovanie logiky v admin area, čiže napr. na akej url sa nachádza list pre userov a pod.
-Druhý typ je HTTP controller, ktorý by mal mať logiku ktorá sa deje v endpointch
+## Relations
+V modeloch máš takéto funkcie ktoré súvisia s relations
 
-Momentálne ich máš pre každý model ako keby zlúčené v jednom controlleri, napr. ChatController.php
-Tento controller obsahuje OCMS logiku pre form a list, ale zároveň v ňom máš svoju custom logiku pre endpointy
-Malo by to byť oddelené, čiže v controllers/ sú OCMS a v http/controllers/ sú HTTP controlleri
-To čo sa vygeneruje commandom php artisan create:controller ostáva v controllers/ a to čo tvoríš ty patrí do http/controllers/
-Daj vedieť či to dáva zmysel
+public function messages()
+{
+    return $this->hasMany('Ben\Slack\Models\Message', 'chat_id');
+}
+
+Využívaš ich niekde? Nemali by byť potrebné, skús vyskúšať či ich je treba, zo skúsenosti stačí keď relations zadefinuješ cez $hasMany, a pod.
+
+## Other
+Na niektoré REVIEW komenty si nereagoval, pls pozri to, a vždy keď niečo opravíš / upravíš pls vymaž ten comment s ktorým to súvisí
+Pls prejdi si všetky REVIEW komenty, ak sú done tak ich vymaž
