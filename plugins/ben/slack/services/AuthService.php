@@ -10,4 +10,9 @@ class AuthService
     {
         return User::where('api_token', $token)->first();
     }
+
+    public static function getAuthenticatedUserFromRequest($request)
+    {
+        return $request->get('authenticated_user');
+    }
 }

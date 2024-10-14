@@ -1,5 +1,6 @@
 <?php namespace Ben\Slack\Http;
 
+use Ben\Slack\Services\AuthService;
 use Illuminate\Http\Request;
 use Ben\Slack\Models\Message;
 use System\Models\File;
@@ -18,7 +19,7 @@ class MessageController
         $message->chat_id = $validatedData['chat_id'];
         $message->content = $validatedData['content'];
 
-        $user = $request->input('authenticated_user');
+        $user = AuthService::getAuthenticatedUserFromRequest($request);
 
         $message->user_id = $user->id;
 

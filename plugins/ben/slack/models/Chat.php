@@ -19,8 +19,11 @@ class Chat extends Model
     /**
      * @var array rules for validation
      */
-    public $rules = [];
-
+    public array $rules = [
+        'user1_id' => 'required|exists:users,id',
+        'user2_id' => 'required|exists:users,id|different:user1_id',
+        'name' => 'required|string|max:255',
+    ];
 
     protected $fillable = ['user1_id', 'user2_id', 'name'];
 
