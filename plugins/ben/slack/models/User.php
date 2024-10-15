@@ -21,10 +21,7 @@ class User extends Model
     /**
      * @var array rules for validation
      */
-    public array $rules = [
-        'username' => 'required',
-        'password' => 'required|min:6',
-    ];
+    public array $rules = [];
 
     protected $fillable = ['username'];
 

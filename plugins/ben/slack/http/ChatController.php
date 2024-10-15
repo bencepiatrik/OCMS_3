@@ -23,10 +23,6 @@ class ChatController
             'name' => $request->input('name')
         ];
 
-        $validator = Validator::make($data, (new Chat)->rules);
-        if ($validator->fails()) {
-            throw new \Exception($validator->errors());
-        }
         $chat = Chat::create($data);
 
         return response()->json($chat);

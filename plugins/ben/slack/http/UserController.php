@@ -19,35 +19,29 @@ class UserController
         // REVIEW - všetká validácia čo takto robíš sa dá premiestniť do modelu a je to tak elegantnejšie / lepšie, takže odporučam premiestniť do $rules = [] pre všetky modely
         // FIX - Register mi funguje bez problemov, login mi vrati error "The password field is required."
         $user = new User();
-        $validatedData = $request->validate($user->rules);
-
-        $user->username = $validatedData['username'];
-        $user->password = $validatedData['password'];
+        $user->username = $request->input('username');
+        $user->password = $request->input('password');
         $user->save();
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function login(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/) // FIX - Už opravené v predošlej commite
+    public function login(Request $request)
     {
-        $user = new User();
-        //dd($request);
-        //dd($user->rules);
-        $validatedData = $request->validate($user->rules);
+        $username = $request->input('username');
+        $password = $request->input('password');
 
-
-        $user = User::where('username', $validatedData['username'])->first();
-
-        if (!$user || !password_verify($validatedData['password'], $user->password)) {
-            throw new \Exception('Invalid username or password');
-
+        if (empty($username) || empty($password)) {
+            return response()->json(['message' => 'Username and password are required'], 400);
         }
 
-        $token = $user->generateApiToken();
+        $user = User::where('username', $username)->first();
 
-        return response()->json(['message' => 'Login successful', 'api_token' => $token], 200);
+        if ($user && password_verify($password, $user->password)) {
+            $token = $user->generateApiToken();
+            return response()->json(['message' => 'Login successful', 'api_token' => $token], 200);
+        }
+
+        return response()->json(['message' => 'Invalid username or password'], 401);
     }
 }

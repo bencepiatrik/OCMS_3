@@ -27,12 +27,6 @@ class Chat extends Model
 
     protected $fillable = ['user1_id', 'user2_id', 'name'];
 
-    public function messages()
-    {
-        return $this->hasMany('Ben\Slack\Models\Message', 'chat_id');
-
-    }
-
     public $belongsTo = [
         'user1' => [User::class, 'key' => 'user1_id'],
         'user2' => [User::class, 'key' => 'user2_id'],
