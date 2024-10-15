@@ -27,9 +27,6 @@ class User extends Model
 
     protected $hashable = ['password'];
 
-
-    // REVIEW - Ak som ti ešte nespomínal $hashable (OCMS docs) tak si to pozri, robí to túto funkciu v podstate za teba
-    // FIX - Ano, konečne som prišiel na to, ako ten hashable funguje
     public function generateApiToken()
     {
         $this->api_token = Str::random(60);

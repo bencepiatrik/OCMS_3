@@ -33,6 +33,10 @@ class Message extends Model
         'attachment' => 'System\Models\File'
     ];
 
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class, 'message_id');
+    }
 
     // REVIEW - vidím že tu riešiš ten file cez custom funkcie, skús pozrieť v OCMS docs attachments, možno to bude jednoduchšie
 }

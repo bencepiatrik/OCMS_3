@@ -6,8 +6,6 @@ use Ben\Slack\Http\MessageController;
 use Ben\Slack\Http\ReactionController;
 use Ben\Slack\Middleware\AuthMiddleware;
 
-// FIX - Dve skupiny v sebe sú lepšie, ani som nevedel, že sa to dá zapísať aj takto. Hlavné komentáre na skupiny endpointov by som nechal, opisovať každý osobitne je naozaj zbytočné.
-
 Route::group(['prefix' => 'api/v1', 'middleware' => ['web']], function() {
     // Auth routes
     Route::post('/register', [UserController::class, 'register']);
@@ -34,5 +32,3 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['web']], function() {
         Route::get('/messages/{message_id}/reactions', [ReactionController::class, 'getReactionsForMessage']);
     });
 });
-
-
