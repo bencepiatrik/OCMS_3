@@ -23,10 +23,9 @@ class ReactionController
 
         $emoji = $request->input('emoji');
 
-        $allowedEmojis = $this->getAllowedEmojis(); // REVIEW - táto istá logika sa ti opakuje o pár riadkov nižšie // FIX - áno, už to vidím
+        $allowedEmojis = $this->getAllowedEmojis();
 
         if (!in_array($emoji, $allowedEmojis)) {
-            // REVIEW - všade kde takto nastáva chyba by si mal použiť throw new Exception() namiesto json response
             throw new \Exception('Emoji not allowed');
         }
 
@@ -47,12 +46,7 @@ class ReactionController
 
     public function getReactionsForMessage($messageId, Request $request)
     {
-        // REVIEW - nepoužívaš usera
-        // FIX - I see.
         $reactions = Reaction::where('message_id', $messageId)->get();
-
-        // REVIEW - Toto by podľa mňa nemala byť úplne chyba, správa nie je chybná ak nemá reakciu/e
-        // FIX - Áno, súhlasím
 
         return response()->json($reactions);
     }

@@ -37,6 +37,4 @@ class Message extends Model
     {
         return $this->hasMany(Reaction::class, 'message_id');
     }
-
-    // REVIEW - vidím že tu riešiš ten file cez custom funkcie, skús pozrieť v OCMS docs attachments, možno to bude jednoduchšie
 }

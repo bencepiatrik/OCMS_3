@@ -14,10 +14,8 @@ class UserController
         return response()->json($users);
     }
 
-    public function register(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/) // FIX - Už opravené v predošlej commite
+    public function register(Request $request)
     {
-        // REVIEW - všetká validácia čo takto robíš sa dá premiestniť do modelu a je to tak elegantnejšie / lepšie, takže odporučam premiestniť do $rules = [] pre všetky modely
-        // FIX - Register mi funguje bez problemov, login mi vrati error "The password field is required."
         $user = new User();
         $validatedData = $request->validate($user->rules);
 
@@ -31,7 +29,7 @@ class UserController
     /**
      * @throws \Exception
      */
-    public function login(Request $request) // REVIEW - Logika tejto funkcie patrí do UserController (ale v http/controllers/) // FIX - Už opravené v predošlej commite
+    public function login(Request $request)
     {
         $user = new User();
         //dd($request);
