@@ -1,0 +1,35 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    message_id:
+        label: Message
+        type: relation
+        relation: message
+        span: left
+        placeholder: Select a message
+
+    user_id:
+        label: User
+        type: relation
+        relation: user
+        span: right
+        placeholder: Select a user
+
+    emoji:
+        label: Emoji
+        type: text
+        span: left
+
+    created_at:
+        label: Created At
+        type: datetime
+        span: left
+        readOnly: true
+
+    updated_at:
+        label: Updated At
+        type: datetime
+        span: right
+        readOnly: true

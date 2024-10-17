@@ -1,0 +1,35 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    chat_id:
+        label: Chat
+        relation: chat
+        select: name
+
+    user_id:
+        label: User
+        relation: user
+        select: username
+
+    content:
+        label: Message Content
+        type: text
+
+    reply_to_message_id:
+        label: Reply To
+        relation: replyToMessage
+        select: id
+
+    created_at:
+        label: Created
+        type: datetime
+
+    updated_at:
+        label: Updated
+        type: datetime
