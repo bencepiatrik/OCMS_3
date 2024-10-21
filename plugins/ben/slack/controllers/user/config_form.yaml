@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: User
+
+# Model Form Field configuration
+form: $/ben/slack/models/user/fields.yaml
+
+# Model Class name
+modelClass: Ben\Slack\Models\User
+
+# Default redirect location
+defaultRedirect: ben/slack/user
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: ben/slack/user/update/:id
+    redirectClose: ben/slack/user
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: ben/slack/user
+    redirectClose: ben/slack/user
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

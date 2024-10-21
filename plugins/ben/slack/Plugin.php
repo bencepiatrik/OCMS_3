@@ -57,12 +57,18 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'ben.slack.some_permission' => [
+            'ben.slack.access_emojis' => [
                 'tab' => 'Slack',
-                'label' => 'Some permission'
+                'label' => 'Manage allowed emojis'
+            ],
+            'ben.slack.chat' => [
+                'tab' => 'Slack',
+                'label' => 'Manage chats'
+            ],
+            'ben.slack.user' => [
+                'tab' => 'Slack',
+                'label' => 'Manage users'
             ],
         ];
     }
@@ -74,15 +80,34 @@ class Plugin extends PluginBase
     {
         /* REVIEW - neregistruješ žiadny admin area navigation, ale pre každý model máš urobený controller a fields.yaml / columns.yaml
         používaš niekde tieto controlleri a fields.yaml / columns.yaml? A taktiež celkovo prečo neregistruješ navigation? V leveli 2 si to implementoval myslím */
-        return []; // Remove this line to activate
-
         return [
             'slack' => [
-                'label' => 'Slack',
-                'url' => Backend::url('ben/slack/mycontroller'),
-                'icon' => 'icon-leaf',
+                'label'       => 'Ben Slack',
+                'icon'        => 'icon-cogs',
                 'permissions' => ['ben.slack.*'],
-                'order' => 500,
+                'order'       => 500,
+                'sideMenu'    => [
+                    'emojisettings' => [
+                        'label'       => 'Emoji Settings',
+                        'url'         => Backend::url('ben/slack/emojisettings'),
+                        'icon'        => 'icon-smile',
+                        'permissions' => ['ben.slack.access_emojis'],
+                    ],
+                    'chats' => [
+                        'category'    => 'Ben Slack',
+                        'label'       => 'Chats',
+                        'url'         => Backend::url('ben/slack/chat'),
+                        'icon'        => 'icon-comments',
+                        'permissions' => ['ben.slack.chat'],
+                    ],
+                    'users' => [
+                        'category'    => 'Ben Slack',
+                        'label'       => 'Users',
+                        'url'         => Backend::url('ben/slack/user'),
+                        'icon'        => 'icon-user',
+                        'permissions' => ['ben.slack.chat'],
+                    ],
+                ],
             ],
         ];
     }
@@ -90,7 +115,7 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            'config' => [
+            'emojis' => [
                 'label'       => 'Emoji Settings',
                 'description' => 'Manage allowed emojis.',
                 'category'    => 'Ben Slack',
@@ -99,7 +124,21 @@ class Plugin extends PluginBase
                 'permissions' => ['ben.slack.access_emojis'],
                 'order'       => 500,
                 'keywords'    => 'emoji reaction',
-            ]
+            ],
+            'chats' => [
+                'category'    => 'Ben Slack',
+                'label'       => 'Chats',
+                'url'         => Backend::url('ben/slack/chat'),
+                'icon'        => 'icon-comments',
+                'permissions' => ['ben.slack.chat'],
+            ],
+            'users' => [
+                'category'    => 'Ben Slack',
+                'label'       => 'Users',
+                'url'         => Backend::url('ben/slack/user'),
+                'icon'        => 'icon-user',
+                'permissions' => ['ben.slack.chat'],
+            ],
         ];
     }
 
