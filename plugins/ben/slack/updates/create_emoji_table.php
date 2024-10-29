@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use October\Rain\Database\Schema\Blueprint;
+use October\Rain\Database\Updates\Migration;
 
 return new class extends Migration
 {
