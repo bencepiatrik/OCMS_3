@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+title: 'Emoji Settings'
+
+form:
+    fields:
+        emojis:
+            label: Allowed Emojis
+            type: repeater
+            prompt: 'Add an emoji'
+            form:
+                fields:
+                    emoji:
+                        label: Emoji
+                        type: text

@@ -1,0 +1,36 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Emoji Setting
+
+# Model Form Field configuration
+form:
+    fields:
+        emoji:
+            label: Emoji
+            type: text
+            span: auto
+
+# Model Class name
+modelClass: Ben\Slack\Models\Emoji
+
+# Default redirect location
+defaultRedirect: ben/slack/emojisettings
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: ben/slack/emojisettings/update/:id
+    redirectClose: ben/slack/emojisettings
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: ben/slack/emojisettings
+    redirectClose: ben/slack/emojisettings
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

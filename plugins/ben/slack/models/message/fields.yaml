@@ -1,0 +1,46 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+
+    chat_id:
+        label: Chat
+        type: relation
+        relation: chat
+        span: left
+        placeholder: Select a chat
+
+    user_id:
+        label: User
+        type: relation
+        relation: user
+        span: right
+        placeholder: Select a user
+
+    content:
+        label: Message Content
+        type: textarea
+        span: full
+
+    reply_to_message_id:
+        label: Reply To Message
+        type: relation
+        relation: replyToMessage
+        span: left
+        placeholder: Select the message this is replying to (optional)
+
+    created_at:
+        label: Created At
+        type: datetime
+        span: left
+        readOnly: true
+
+    updated_at:
+        label: Updated At
+        type: datetime
+        span: right
+        readOnly: true

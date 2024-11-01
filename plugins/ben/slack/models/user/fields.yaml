@@ -1,0 +1,35 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    username:
+        label: Username
+        type: text
+        span: full
+        required: true
+    email:
+        label: Email
+        type: text
+        span: full
+        required: true
+    password:
+        label: Password
+        type: password
+        span: full
+        required: true
+    api_token:
+        label: API Token
+        type: text
+        span: full
+        readOnly: true
+    created_at:
+        label: Created At
+        type: datetime
+        span: auto
+        readOnly: true
+    updated_at:
+        label: Updated At
+        type: datetime
+        span: auto
+        readOnly: true

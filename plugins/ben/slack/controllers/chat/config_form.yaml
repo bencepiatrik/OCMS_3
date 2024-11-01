@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Chat
+
+# Model Form Field configuration
+form: $/ben/slack/models/chat/fields.yaml
+
+# Model Class name
+modelClass: Ben\Slack\Models\Chat
+
+# Default redirect location
+defaultRedirect: ben/slack/chat
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: ben/slack/chat/update/:id
+    redirectClose: ben/slack/chat
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: ben/slack/chat
+    redirectClose: ben/slack/chat
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title
